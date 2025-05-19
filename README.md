@@ -5,8 +5,7 @@
 
 SQL Project: High-Value Customers with Multiple Products
 This project explores key customer insights from the Adashi platform. The first task focuses on identifying high-value customers who hold both savings and investment products.
-
-🧩 High-Value Customers with Multiple Products
+ High-Value Customers with Multiple Products
 Scenario: The business team wants to identify customers who have both a funded savings and investment plan. This enables the team to assess cross-selling opportunities and reward loyalty.
 
 ✅ Objective:
@@ -18,7 +17,7 @@ At least one funded investment plan (is_fixed_investment = 1)
 
 Sorted by their total deposits (from confirmed_amount field in kobo)
 
-## 🧠 Approach:
+##  Approach:
 Joined Tables:
 
 plans_plan (for identifying savings and investment types)
@@ -107,7 +106,7 @@ Grouping by both customer and month across potentially large transaction tables 
 challenge :
 The business wants to re-engage inactive users who haven’t transacted recently.
 
-🎯 Task
+## Task
 Find all active accounts (savings or investments) with no transactions in the last 1 month.
 
 Tables Used:
@@ -118,7 +117,7 @@ plans_plan
 
 savings_savingsaccount (transaction data assumed here)
 
-🛠️ Approach
+## Approach
 Identify Active Users:
 I filtered for users where is_active = 1 from the users_customuser table.
 
@@ -134,7 +133,7 @@ Accounts where last_transaction_date is older than 30 days were flagged as inact
 Final Output:
 Only users with a savings or investment plan and no transactions in the last 1 month were included.
 
-## 📈 Final Output Columns
+##  Final Output Columns
 Column	Description
 owner_id	Unique ID of the customer
 name	Full name of the customer
@@ -142,7 +141,7 @@ product_type	Savings / Investment
 last_transaction_date	Date of last activity
 inactivity_days	Days since the last transaction
 
-🧩 Challenges & Fixes
+ ## Challenges & Fixes
 Null Transaction Dates:
 Some users had NULL for last_transaction_date. I handled this using COALESCE() with a placeholder early date to still compute inactivity properly.
 
@@ -199,7 +198,7 @@ tenure_months	Account age in months
 total_transactions	Count of all transactions
 estimated_clv	CLV based on formula
 
-🧩 Challenges & Fixes
+## Challenges & Fixes
 Tenure Handling:
 Some customers had very recent signups (e.g., less than a month). I added a safeguard to avoid divide-by-zero in the CLV formula.
 

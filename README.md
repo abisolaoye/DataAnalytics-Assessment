@@ -4,12 +4,12 @@
  
 
 SQL Project: High-Value Customers with Multiple Products
-This project explores key customer insights from the Adashi platform. The first task focuses on identifying high-value customers who hold both savings and investment products.
+This project explores key customer insights from the Kowope platform. The first task focuses on identifying high-value customers who hold both savings and investment products.
  High-Value Customers with Multiple Products
 Scenario: The business team wants to identify customers who have both a funded savings and investment plan. This enables the team to assess cross-selling opportunities and reward loyalty.
 
 ✅ Objective:
-Write a query to return customers who have:
+To write a query to return customers who have:
 
 At least one funded savings plan (is_regular_savings = 1)
 
@@ -46,27 +46,9 @@ savings_count	Number of active savings plans
 investment_count	Number of active investment plans
 total_deposits	Sum of confirmed deposits (in kobo)
 
-⚠️ Challenges & Resolutions
-## 1. Query Timeout
-Issue: Query was slow and kept timing out.
 
-Fix:
 
-Removed DISTINCT, which was unnecessary after using GROUP BY.
 
-Verified join conditions were correct.
-
-Limited filtering with WHERE b.is_active = 1.
-
-## 2. Incorrect Column in HAVING Clause
-Issue: Mistyped a.is is_a_fund instead of a.is_a_fund.
-
-Fix: Corrected the syntax for filtering investment-type plans.
-
-## 3. Table Relationships
-Issue: Confusion around using id vs owner_id in savings_savingsaccount.
-
-Fix: Ensured all references to the customer were made via owner_id (not row-level id)
 
 
 ##Monthly Aggregation:
@@ -103,7 +85,7 @@ Grouping by both customer and month across potentially large transaction tables 
 The business wants to re-engage inactive users who haven’t transacted recently.
 
 ## Task
-Find all active accounts (savings or investments) with no transactions in the last 1 month.
+To find all active accounts (savings or investments) with no transactions in the last 1 month.
 
 Tables Used:
 
@@ -201,6 +183,9 @@ Transactions with zero or null values were excluded to prevent inflation of CLV.
 
 ## Query Performance:
 I used CTEs and filtering before grouping to reduce query runtime and ensure correct grouping logic.
+
+
+This project is made with ❤️ by Abisola Oyetunji!
 
 
 

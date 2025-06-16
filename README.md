@@ -1,7 +1,7 @@
-# DataAnalytics-Assessment
+# Customer Segmentation Project
 
 
-## Assessment_Q1
+ 
 
 SQL Project: High-Value Customers with Multiple Products
 This project explores key customer insights from the Adashi platform. The first task focuses on identifying high-value customers who hold both savings and investment products.
@@ -69,10 +69,8 @@ Issue: Confusion around using id vs owner_id in savings_savingsaccount.
 Fix: Ensured all references to the customer were made via owner_id (not row-level id)
 
 
-## Assessment 2:
+##Monthly Aggregation:
 
-## Approach
-Monthly Aggregation:
 I extracted owner_id and grouped transactions by the year and month (using DATE_FORMAT(transaction_date, '%Y-%m')) to get the number of transactions per month per customer.
 
 ## Average Transactions Calculation:
@@ -95,15 +93,13 @@ Date Grouping Logic:
 Initially, I considered using TRUNC() but realized it's not supported in MySQL. I switched to DATE_FORMAT() for better compatibility.
 
 ## Identifying Customers Correctly:
-At first, I mistakenly used the transaction id, which led to incorrect customer grouping. I fixed this by using owner_id, which correctly represents the customer.
+At first, I used the transaction id, which led to incorrect customer grouping. I fixed this by using owner_id, which correctly represents the customer.
 
 ## Performance Concerns:
 Grouping by both customer and month across potentially large transaction tables was a concern, so I wrote a CTE (monthly_counts) to isolate and reduce data early in the query flow.
 
 
-## Assessment 3:
-
-challenge :
+## challenge :
 The business wants to re-engage inactive users who haven’t transacted recently.
 
 ## Task
@@ -152,9 +148,7 @@ Multiple Joins Affecting Row Count:
 Careful filtering post-join ensured I didn’t double count customers who had multiple plans but one was active.
 
 
-## Assessment 4:
-
-Customer Lifetime Value (CLV) Estimation
+## Customer Lifetime Value (CLV) Estimation
  Scenario:
 The marketing team wants to estimate CLV using account tenure and transaction volume.
  Task
@@ -176,7 +170,7 @@ savings_savingsaccount
 
 ## Approach
 Calculate Tenure:
-Used TIMESTAMPDIFF(MONTH, date_joined, CURRENT_DATE) to get the number of months each customer has had an account.
+I used TIMESTAMPDIFF(MONTH, date_joined, CURRENT_DATE) to get the number of months each customer has had an account.
 
 Transaction Counts:
 Summed up transactions using COUNT() on valid confirmed_amount records from the savings_savingsaccount table.
@@ -206,7 +200,7 @@ Some customers had very recent signups (e.g., less than a month). I added a safe
 Transactions with zero or null values were excluded to prevent inflation of CLV.
 
 ## Query Performance:
-Used CTEs and filtering before grouping to reduce query runtime and ensure correct grouping logic.
+I used CTEs and filtering before grouping to reduce query runtime and ensure correct grouping logic.
 
 
 
